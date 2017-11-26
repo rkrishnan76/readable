@@ -4,6 +4,7 @@ import {getPostFromServer,votePostOnServer,deletePostOnServer} from '../actions/
 import {getCommentsFromServer} from '../actions/commentActions'
 import {getCategoriesFromServer} from '../actions'
 import Comments from './Comments'
+import DeletedPost from './DeletedPost'
 import {addServerPost,editServerPost} from '../util/serverApi'
 import Uuid from 'uuid-lib'
 import Header from './Header'
@@ -31,7 +32,8 @@ class Post extends Component {
     body: '',
     newPost:'',
     deleted:'',
-    id:''
+    id:'',
+    deletedPost:'no'
   }
 
   componentDidMount () {
@@ -68,7 +70,7 @@ class Post extends Component {
           voteScore: data.post.voteScore,
           deleted: data.post.deleted,
           newPost:'no'
-        })): this.props.history.push('/'))
+        })): this.deletedPost())
       })
 
       this.props.getCommentsFromServer(postId)
@@ -76,6 +78,10 @@ class Post extends Component {
     else{
       this.props.getCommentsFromServer(null)
     }
+  }
+
+  deletedPost = () => {
+    this.setState({deletedPost:'yes'})
   }
 
   deletePost = () => {
@@ -117,6 +123,7 @@ class Post extends Component {
   }
 
   onCancel() {
+
     this.props.history.push('/')
   }
 
@@ -144,11 +151,12 @@ class Post extends Component {
   }
   render () {
     const optionList = this.props.categories.map(category => ( <option key={category.name} value={category.name}>{category.name}</option> ) )
-
+     if(this.state.deletedPost==='yes'){
+        return(<DeletedPost/>)
+      }
+   else{
     return (
-
       <div>
-
         <Grid>
         <Header params={this.props.match.params}/>
           <Row className="show-grid">
@@ -220,6 +228,7 @@ class Post extends Component {
       </div>
     )
   }
+ }
 }
 
 const mapStateToProps = ({post, categories, comments}) => ({post, categories, comments})
