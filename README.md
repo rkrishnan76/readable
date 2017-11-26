@@ -121,14 +121,30 @@ We are always open to [your feedback](https://github.com/facebookincubator/creat
 After creation, your project should look like this:
 
 ```
-my-app/
+readable/
   README.md
+  api-server/
+    node_modules/
+      README.md
+      categories.js
+      comments.js
+      config.js
+      package.json
+      posts.js
+      server.js
   node_modules/
   package.json
   public/
     index.html
     favicon.ico
   src/
+    actions/
+    components/
+    css/
+    fonts/
+    icons/
+    reducers/
+    util/
     App.css
     App.js
     App.test.js
@@ -152,6 +168,11 @@ Read instructions below for using assets from JavaScript and HTML.
 
 You can, however, create more top-level directories.<br>
 They will not be included in the production build so you can use them for things like documentation.
+
+
+Inside api-server, run npm install and npm start.  This would start the api server that provides the categories and posts related server apis
+@ root level run the npm install and npm start (that is @ the level where api-server is located).  this would start the UI server
+
 
 ## Available Scripts
 
@@ -283,7 +304,7 @@ In the WebStorm menu `Run` select `Edit Configurations...`. Then click `+` and s
 
 Start your app by running `npm start`, then press `^D` on macOS or `F9` on Windows and Linux or click the green debug icon to start debugging in WebStorm.
 
-The same way you can debug your application in IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro, and RubyMine. 
+The same way you can debug your application in IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro, and RubyMine.
 
 ## Formatting Code Automatically
 
@@ -1769,7 +1790,7 @@ If you’re using [Apache HTTP Server](https://httpd.apache.org/), you need to c
     RewriteRule ^ index.html [QSA,L]
 ```
 
-It will get copied to the `build` folder when you run `npm run build`. 
+It will get copied to the `build` folder when you run `npm run build`.
 
 If you’re using [Apache Tomcat](http://tomcat.apache.org/), you need to follow [this Stack Overflow answer](https://stackoverflow.com/a/41249464/4878474).
 
